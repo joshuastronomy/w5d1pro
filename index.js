@@ -3,17 +3,17 @@ const lorem = require('lorem-ipsum');
 
 const lr = express();
 const output = lorem({
-  count: 3                      // Number of words, sentences, or paragraphs to generate.
-, units: 'paragraphs'            // Generate words, sentences, or paragraphs.
-, sentenceLowerBound: 5         // Minimum words per sentence.
-, sentenceUpperBound: 15        // Maximum words per sentence.
-, paragraphLowerBound: 3        // Minimum sentences per paragraph.
-, paragraphUpperBound: 7        // Maximum sentences per paragraph.
+  count: 3
+, units: 'paragraphs'
 , format: 'html'
 });
 
-lr.get('/lorem', function (req, res) {
+lr.get('/lorem/', function (req, res) {
   res.send(output);
+});
+
+lr.get('/lorem/:id', function (req, res) {
+  res.send(lorem({count : req.params.id, units: 'paragraphs', format: 'html'}));
 });
 
 lr.listen(3000, function () {
